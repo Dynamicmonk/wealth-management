@@ -1,5 +1,5 @@
 function App() {
-  return <p>This is Sample App!</p>;
+  return <p>This is Sample App plus addition!</p>;
 }
 
 export default App;
