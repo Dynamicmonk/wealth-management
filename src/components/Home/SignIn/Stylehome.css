@@ -1,0 +1,10 @@
+.set-size{
+        font-size: 34px;
+        padding: 5px;
+        border-radius: 50%;
+      }
+.set-size:hover{
+        background-color: grey;
+        color: white;
+      
+      }
