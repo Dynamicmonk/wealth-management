@@ -18,13 +18,15 @@ function App() {
       <Route path='/' element={<Home/>} />
       <Route path='/signup' element={<SignUp/>}/>
 
-      {/* <Route path='/privateComponent' element={<PrivateComponent/>}>
-        <Route path='/privateComponent/dashboard' element={<Dashboard/>}/>
+      <Route path='/privateComponent' element={<PrivateComponent/>}/>
+
+        {/* <Route path='/privateComponent/dashboard' element={<Dashboard/>}/>
         <Route path='/privateComponent/report' element={<Report/>} />
         <Route path='/privateComponent/finance' element={<Finance/>} />
         <Route path='/privateComponent/members' element={<Members/>} />
-        <Route path='/privateComponent/documents' element={<Document/>} />
-      </Route> */}
+        <Route path='/privateComponent/documents' element={<Document/>} /> */}
+
+      {/* </Route> */}
 
     </Routes>
 

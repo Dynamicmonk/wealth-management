@@ -10,6 +10,7 @@ export const Container=styled.div`
         font-weight:bold;
         font-size:30px;
         color: white;
+        position: relative;
 
 `
 
@@ -28,4 +29,9 @@ export const Para=styled.p`
         color: white;
         font-size: 18px;
         margin-right: 0;
+`
+export const Logo=styled.img`
+        width: 50px;
+        height: 40px;
+        position: absolute;
 `

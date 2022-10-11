@@ -2,9 +2,10 @@ import React, {useState} from 'react'
 import {AnimatePresence, motion} from 'framer-motion'
 import {FaHome, FaBars, FaEnvelope, FaCopy, FaPiggyBank,FaTwitter,FaClipboardCheck,FaUser , FaUsers, FaChartArea, FaSearch } from 'react-icons/fa'
 import { NavLink } from 'react-router-dom'
+import './StyleSidebar.css'
 
 
-const SideBar = () => {
+const SideBar = ({children}) => {
   const routes=[
     {
       path:'/dashboard',
@@ -88,70 +89,29 @@ const imgAnimation={
     transition:0.5,
   }
 };
-//   const topAnimation={
-//     hidden:{
-//       width: '100%',
-//       opacity: 1,
-//       marginTop: '-80px',
-//     paddingTop: '22px',
-//     paddingRight: '10px',
-//     width:'100%',
-//     height:'80px',
-//     display:'flex'
-//   },
-//     show:{
-//         width: '100%',
-//         opacity: 1,
-//         marginTop: '-80px',
-//       paddingTop: '22px',
-//       paddingRight: '10px',
-//       width:'100%',
-//     height:'80px',
-//     display:'flex'
-// }
-// }
+
   return (
     <>
     <div className='main-container'>
-      <motion.div className='side-bar' animate={{width: open?'200px':'40px', transition:{
+      <motion.div className='side-bar' 
+      animate={{width: open?'200px':'40px',
+       transition:{
           type:'spring',
           damping:12,
         }}}>
           <div className="top-section">
-            {/* <AnimatePresence> */}
-           {/* {open && <TopBar 
-          className='main-bar'>
-            <FaClipboardCheck className='margin-set size-set-icons'/>
-            <FaTwitter className='margin-set size-set-icons'/>
-            <FaUser className='margin-set size-set-icons'/>
-          </TopBar>} */}
-          {/* </AnimatePresence> */}
             <AnimatePresence>
             {open && <motion.img variants={imgAnimation}
             initial='hidden'
             animate='show'
             exit='hidden'
-            src="https://cdn.pixabay.com/photo/2016/12/07/15/15/lotus-with-hands-1889661_960_720.png" alt="Lotus" className='my-img' />}
+            src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Lotus" className='my-img' />}
             </AnimatePresence> 
             
             <div className="bars">
               <FaBars onClick={toggle}/>
             </div>
 
-          </div>
-          <div className="search">
-            <div className="search-icon">
-            <FaSearch/>
-            </div>
-            <AnimatePresence>
-            {open && <div className="search-input">
-              <motion.input
-              initial='hidden'
-              animate='show'
-              exit='hidden' 
-              variants={inputAnimation} type="text" placeholder='Search .....' />
-            </div> }
-            </AnimatePresence>
           </div>
            <section className='routes'>
             {routes.map((route)=> { 
@@ -175,9 +135,9 @@ const imgAnimation={
            </section>
         </motion.div>
         <div>
-        {/* <main className='my-main'>
+        <main className='my-main'>
                 {children}
-            </main> */}
+            </main>
             </div>
     </div>
     </>
