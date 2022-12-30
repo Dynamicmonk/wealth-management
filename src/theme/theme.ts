@@ -2,14 +2,27 @@ import { DefaultTheme } from "styled-components";
 
 declare module "styled-components" {
   export interface DefaultTheme {
-    fontSize: {
+    deskTopfontSize: {
       h1: string;
       h2: string;
       h3: string;
-      h4: string;
-      bodyLarge: string;
-      bodyMedium: string;
-      bodySmall: string;
+      body: string;
+      secondary: string;
+      labels: string;
+    };
+    mobilefontSize: {
+      h1: string;
+      h2: string;
+      h3: string;
+      body: string;
+      secondary: string;
+      labels: string;
+    };
+    colors: {
+      neutral100: string;
+      secondary: {
+        blue: string;
+      };
     };
     spaces: {
       xxs: string;
@@ -44,14 +57,27 @@ declare module "styled-components" {
 }
 
 export const theme: DefaultTheme = {
-  fontSize: {
-    h1: "24px",
-    h2: "21px",
-    h3: "18px",
-    h4: "14px",
-    bodyLarge: "18px",
-    bodyMedium: "14px",
-    bodySmall: "12px",
+  deskTopfontSize: {
+    h1: "54px",
+    h2: "32px",
+    h3: "28px",
+    body: "20px",
+    secondary: "18px",
+    labels: "20px",
+  },
+  mobilefontSize: {
+    h1: "54px",
+    h2: "26px",
+    h3: "22px",
+    body: "18px",
+    secondary: "16px",
+    labels: "18px",
+  },
+  colors: {
+    neutral100: "#fff",
+    secondary: {
+      blue: "dodgerblue",
+    },
   },
   spaces: {
     xxs: "4px",

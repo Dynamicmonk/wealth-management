@@ -1,0 +1,232 @@
+.icon-fa{
+    font-size: 40px;
+    text-align: center;
+}
+
+
+
+.dashimg{
+width:70px;
+    height: 70px;
+    border-radius: 50%;
+    border:1px solid grey;
+    margin:18px;
+    float: center;
+}
+.dashp{
+display:flex;
+align-items: center;
+justify-content:center;
+align-items: center;
+text-align: center;
+display:block;
+margin: 5px 30px;
+width: 20%;
+}
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.outlet{
+    border: 1px solid rgb(231, 225, 225);
+    width: 70%;
+    border-radius: 4px;
+    margin: 1% 15%;
+    height: auto;
+    scroll-behavior: smooth;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.model-bttn{
+    background-color:#293462;
+    margin-left:6px;
+    border:none;
+    color:white;
+    width:160px;
+    height:40px;
+    border-radius:4px ;
+    font-size:18px
+}
+
+.model-bttn:disabled{
+    background-color: #f3f3f3;
+    color: grey;
+    opacity: 0.3;
+    border: 1px solid grey;
+}
+
+.model-div{
+    width: 70%;
+    margin: 2% 15%;
+    height: auto;
+    border: 1px solid black;
+
+}
+
+/* *************** */
+
+.bloc-tab {
+    display: flex;
+  }
+  .tabs {
+  
+    padding: 15px;
+    text-align: center;
+    width: 20%;
+    background: rgba(128, 128, 128, 0.075);
+    cursor: pointer;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.274);
+    box-sizing: content-box;
+    position: relative;
+    outline: none;
+  }
+  .tabs:not(:last-child){
+    border-right: 1px solid rgba(0, 0, 0, 0.274);
+  }
+  
+  .active-tabs  {
+    background: white;
+    border-bottom: 1px solid transparent;
+  }
+  
+  .active-tabs::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% + 2px);
+    height: 5px;
+    background: rgb(88, 147, 241);
+  }
+  .content-tabs {
+    flex-grow : 1;
+  }
+  .content {
+    background: white;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    display: none;
+    color: black;
+  }
+ 
+  .active-content {
+    display: block;
+  }
+
+  .container-mod{
+    display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /* background: #f1f1f1; */
+  margin: 0 0;
+  /* word-break: break-all; */
+  /* border: 1px solid rgba(214, 15, 15, 0.274); */
+  /* background-color: blue; */
+  }
+
+  .card-upper{
+    width: 100%;
+    height: 70%;
+    /* border: 1px solid black; */
+    /* background-color: #dee8eb; */
+    /* box-shadow: 1px  1px  3px grey; */
+    display: flex;
+
+
+  }
+
+  .card-middle{
+width: 50%;
+height: 100%;
+align-items: center;
+/* border: 1px solid red; */
+
+  }
+
+  .card-lower{
+width: 100%;
+height: 30%;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 6px;
+/* border: 1px solid blue; */
+  }
+
+  .card-img{
+    width:50%;
+    height: 100%;
+    border-radius: 50%;
+    border:1px solid grey;
+    float: center;
+    width: 70px;
+    height: 70px;
+    padding: 5px;
+    /* margin:18px */
+  }
+
+  .cards{
+    width: 200px;
+    column-gap: 10px;
+    right:0;
+    height: auto;
+    /* border: 1px solid #3f16d399; */
+    display: block;
+    padding: 8px;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    /* margin-right: 10px; */
+    box-shadow: 1px  1px  3px grey;
+    border-radius: 5px;
+    border-top: 1px solid rgba(165, 160, 160, 0.3);
+}
+
+.cards:active{
+    border:1px solid rgba(165, 160, 160, 0.3);
+    
+}
+
+.img-middel{
+  padding:5px 20px;
+}
+
+.card-bttn{
+  width: 95px;
+  height: 20px;
+  color: white;
+  background-color: rgb(130, 146, 175);
+  border: none;
+  border-radius: 4px;
+}
+
+.slick-slide {
+  margin: 0 20px;
+  overflow: hidden;
+  /* height: 50px;
+  border: 1px solid black; */
+  /* -webkit-backface-visibility: hidden; */
+}
+
+.slick-track{
+  height: 140px;
+  width: 100%;
+  /* border: 1px solid black; */
+}

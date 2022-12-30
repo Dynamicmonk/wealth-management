@@ -1,14 +1,20 @@
   .main-container{
     display: flex;
+    width: 100vw;
+    height: 90vh;
+    position: sticky;
   }
   
   .my-main{
     padding: 20px;
+    width: 85vw;
+    height: 100vh;
   }
   .side-bar{
     background-color: #293462;
     color: white;
     height: 100vh;
+    
   }
   .active{
     border-right: 4px solid rgb(249, 248, 248);
@@ -89,5 +95,34 @@
     transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
     background-color: rgb(94, 96, 105);
 } 
+
+.menu{
+  display: flex;
+  color: white;
+  gap: 10px;
+  padding: 5px 10px;
+  font-size: 18px;
+  text-decoration: none;
+  margin-top: 15px;
+  border-right: 4px solid transparent;
+  transition: cubic-bezier(0.215, 0.610, 0.355, 1);
+  letter-spacing: 1px; 
+  justify-content: space-between;
+}
+
+.menu-items{
+  display:flex;
+  gap:10px;
+}
   
-  
+  .menu-items{
+    display:flex;
+    gap:10px;
+  }
+
+  .routes {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}

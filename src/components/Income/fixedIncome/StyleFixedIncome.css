@@ -1,0 +1,33 @@
+.TableRow{
+    margin-top:10px;
+    border:1px solid black
+}
+
+.radio{
+    border: 1px solid grey;
+}
+
+.tdd{
+    border:none;
+    margin-left:-10p;
+    /* border:1px solid black; */
+    /* width:35px;
+    height:100%; */
+
+}
+
+table, th, td {
+  border: 1px solid rgb(174, 171, 171);
+}
+
+table{
+    width: 80%;
+    margin:10%;
+    height: auto;
+    background-color: #eff2f3;
+    box-shadow: 1px  1px  3px grey;
+}
+
+td{
+    height: 70px;
+}

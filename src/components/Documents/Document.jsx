@@ -1,8 +1,11 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom'
+import '../Documents/StyleDocument'
+import { Btton, ContainerD , InputDoc } from '../Documents/StyleDocument'
 
 function Document() {
   return (
-    <div>Document</div>
+    <div><Outlet/></div>
   )
 }
 

@@ -3,5 +3,13 @@ export const prodEnvironment = () => {
     return process.env.REACT_APP_SIGN_KEY!;
   };
 
-  return { getAppSignInKey };
+  const getAppServerUrl = () => {
+    return process.env.REACT_APP_BASE_URL!;
+  };
+
+  const getKeyToStoreLoginId = () => {
+    return process.env.REACT_APP_SIGNIN_KEY!;
+  };
+
+  return { getAppSignInKey, getAppServerUrl, getKeyToStoreLoginId };
 };

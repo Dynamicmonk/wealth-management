@@ -5,7 +5,7 @@ import TopBar from '../TopBar/TopBar'
 import { Container } from './StylePrivateComponent'
 import Dashboard from '../Dashboard/Dashboard'
 import Report from '../Reports/Report'
-import Finance from '../Finances/Finance'
+import Finance from '../Investment/Investment'
 import Document from '../Documents/Document'
 import Members from '../Members/Members'
 
@@ -13,17 +13,17 @@ function PrivateComponent() {
   return (
     <>
     <TopBar/>
+    <Outlet/>
     {/* <Container> */}
-    <SideBar>
-      <Routes>
-    <Route path='/dashboard' element={<Dashboard/>}/>
+    {/* <SideBar/>  */}
+       {/* <Routes>
+        <Route path='/dashboard' element={<Dashboard/>}/>
         <Route path='/report' element={<Report/>} />
         <Route path='/finance' element={<Finance/>} />
         <Route path='/members' element={<Members/>} />
         <Route path='/documents' element={<Document/>} />
-        </Routes>
-    </SideBar>
-    {/* <Outlet/> */}
+        </Routes> */}
+    {/* </SideBar> */}
     {/* </Container> */}
     
     

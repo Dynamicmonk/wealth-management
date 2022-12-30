@@ -1,0 +1,8 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/8c672440-3a1b-47e9-8aec-be331b4e17ce/AppServices/subscriptions/8c672440-3a1b-47e9-8aec-be331b4e17ce/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/DMfamilyassets",
+    "appService.deploySubpath": ".",
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ]
+}
