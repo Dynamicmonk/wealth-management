@@ -1,12 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-const sampleSlice = createSlice({
-  name: "authenticate",
-  initialState: {},
-  reducers: {},
-  extraReducers: (builder) => {},
-});
+// const getInvementData = createAsyncThunk<any>()
 
-export const {} = sampleSlice.actions;
+// const sampleSlice = createSlice({
+//   name: "authenticate",
+//   initialState: {},
+//   reducers: {},
+//   extraReducers: (builder) => {},
+// });
 
-export default sampleSlice.reducer;
+// export const {} = sampleSlice.actions;
+
+// export default sampleSlice.reducer;

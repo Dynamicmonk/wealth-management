@@ -1,0 +1,83 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstname": "yellow",
+      "lastname": "sunrise",
+      "age":24,
+      "gender":"female",
+      "relationship":"sister",
+      "pan":"abc1111",
+      "aadhar":"aadhar111",
+      "email":"yellow@gmail.com",
+      "mobile":11111111,
+      "imageurl":"https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
+    },
+    {
+      "id": 2,
+      "firstname": "Jacob",
+      "lastname": "Decostash",
+      "age":55,
+      "gender":"male",
+      "relationship":"father",
+      "pan":"abc2222",
+      "aadhar":"aadhar2222",
+      "email":"jacob@gmail.com",
+      "mobile":12345678,
+      "imageurl":"https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
+    },
+    {
+      "id": 3,
+      "firstname": "Devika",
+      "lastname": "Potter",
+      "age":24,
+      "gender":"female",
+      "relationship":"sister",
+      "pan":"abc333",
+      "aadhar":"aadhar3333",
+      "email":"devika@gmail.com",
+      "mobile":33333333,
+      "imageurl":"https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
+    },
+    {
+      "id": 4,
+      "firstname": "stick",
+      "lastname": "DocMarich",
+      "age":15,
+      "gender":"male",
+      "relationship":"brother",
+      "pan":"abc4444",
+      "aadhar":"aadhar444",
+      "email":"stick@gmail.com",
+      "mobile":444444,
+      "imageurl":"https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
+    },
+    {
+      "id": 5,
+      "firstname": "Pettash",
+      "lastname": "roberta",
+      "age":43,
+      "gender":"female",
+      "relationship":"mother",
+      "pan":"abc5555",
+      "aadhar":"aadhar555",
+      "email":"pettash@gmail.com",
+      "mobile":1234888,
+      "imageurl":"https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
+    },
+    {
+      "id": 6,
+      "firstname": "samuel",
+      "lastname": "typi",
+      "age":24,
+      "gender":"male",
+      "relationship":"brother",
+      "pan":"abc1000",
+      "aadhar":"aadhar222",
+      "email":"samuel@gmail.com",
+      "mobile":12345999,
+      "imageurl":"https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
+    }
+  ]
+  
+}

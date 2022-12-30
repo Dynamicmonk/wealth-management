@@ -1,0 +1,128 @@
+  .main-container{
+    display: flex;
+    width: 100vw;
+    height: 90vh;
+    position: sticky;
+  }
+  
+  .my-main{
+    padding: 20px;
+    width: 85vw;
+    height: 100vh;
+  }
+  .side-bar{
+    background-color: #293462;
+    color: white;
+    height: 100vh;
+    
+  }
+  .active{
+    border-right: 4px solid rgb(249, 248, 248);
+    background-color: rgb(83, 84, 89);
+  }
+  .my-img{
+    width: 48px;
+    height: auto;
+    /* padding: 2px; */
+  }
+  .top-section{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 15px;
+    /* border: 1px solid white; */
+    width: 80%;
+    margin: -5px;
+  
+  }
+  .search{
+    display: flex;
+     align-items: center;
+     margin: 5px 0;
+     height: 30px;
+     padding: 5px 10px;
+  
+  }
+  .search input{
+    border: none;
+    border-radius: 4px;
+    background-color: white;
+    color: grey;
+    margin-left: 10px;
+    
+  
+  }
+  
+  .link-text{
+    white-space:nowrap
+  }
+  
+  
+  
+  
+  .icons{
+    border-bottom: 3px solid transparent;
+    width: 25px;
+    height: 25px;
+    padding: 2px;
+  }
+  
+  .icons:hover{
+    background-color: #293462;
+    color: white;
+  
+  }
+  .icons:active{
+    background-color: #293462;
+    color: white;
+    border-bottom: 3px solid orangered;
+    
+  }
+  
+.nav-link{
+    display: flex;
+    color: white;
+    gap: 30px;
+    padding: 5px 10px;
+    font-size: 18px;
+    text-decoration: none;
+    margin-top: 15px;
+    border-right: 4px solid transparent;
+    letter-spacing: 1px;
+} 
+.nav-link:hover{
+    border-right: 4px solid white;
+    transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+    background-color: rgb(94, 96, 105);
+} 
+
+.menu{
+  display: flex;
+  color: white;
+  gap: 10px;
+  padding: 5px 10px;
+  font-size: 18px;
+  text-decoration: none;
+  margin-top: 15px;
+  border-right: 4px solid transparent;
+  transition: cubic-bezier(0.215, 0.610, 0.355, 1);
+  letter-spacing: 1px; 
+  justify-content: space-between;
+}
+
+.menu-items{
+  display:flex;
+  gap:10px;
+}
+  
+  .menu-items{
+    display:flex;
+    gap:10px;
+  }
+
+  .routes {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
