@@ -3,7 +3,6 @@ import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 
 import { FaGoogle, FaTwitter, FaFacebookF } from "react-icons/fa";
-import { BsInfoCircle } from "react-icons/bs";
 
 import { StyleSignUp } from "./Styles/StyleSignUp";
 
@@ -19,6 +18,7 @@ import { useAppDispatch, useAppSelector } from "../../../store/useStoreHooks";
 import { loginWallpaper } from "../../../assets/images/imagesList";
 
 import { SIGN_IN_PATH } from "../../../routes/constants";
+import { FormInput } from "../../Form/FormInput";
 
 const Signup = () => {
   const dispatch = useAppDispatch();
@@ -31,7 +31,7 @@ const Signup = () => {
 
   const handleUIVerify = (
     inputType: "firstName" | "lastName" | "password" | "phone" | "email",
-    data: boolean
+    data: string
   ) => {
     dispatch(handleVerifyUIInputs({ type: "signUp", inputType, data }));
   };
@@ -70,7 +70,14 @@ const Signup = () => {
         break;
 
       case "submitForm":
-        if (!signUp.isSignUpFormValid) return;
+        if (!signUp.isSignUpFormValid) {
+          handleUIVerify("firstName", signUp.inputs.firstname ?? "");
+          handleUIVerify("lastName", signUp.inputs.lastname ?? "");
+          handleUIVerify("email", signUp.inputs.Email);
+          handleUIVerify("phone", signUp.inputs.Phone1);
+          handleUIVerify("password", signUp.inputs.Password);
+          return;
+        }
 
         dispatch(
           performUserSignUp({
@@ -93,16 +100,17 @@ const Signup = () => {
   useEffect(() => {
     if (signUp.signUpData || signUp.error) {
       setAccountCreated(true);
-      dispatch(resetUserFormInputs({ type: "signUp" }));
+      dispatch(resetUserFormInputs({ type: "signUp", subType: "inputs" }));
 
       modelTimerRef.current = window.setTimeout(() => {
         setAccountCreated(false);
-      }, 2000);
+        dispatch(resetUserFormInputs({ type: "signUp", subType: "apiCall" }));
+      }, 4000);
     }
 
     return () => {
       modelTimerRef.current && window.clearTimeout(modelTimerRef.current);
-      dispatch(resetUserFormInputs({ type: "signUp" }));
+      dispatch(resetUserFormInputs({ type: "signUp", subType: "inputs" }));
     };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -126,7 +134,7 @@ const Signup = () => {
           >
             <strong>
               {Boolean(signUp.error)
-                ? "Account can not be created!"
+                ? signUp.error
                 : "Your account has been created!"}
             </strong>
           </div>
@@ -136,130 +144,91 @@ const Signup = () => {
           className="right-container-form-sign-up"
           onSubmit={(event) => event.preventDefault()}
         >
-          <input
+          <FormInput
             type="text"
-            placeholder="Enter your first name"
-            value={signUp.inputs.firstname}
-            onBlur={(e) => handleUIVerify("firstName", e.target.validity.valid)}
             name="firstName"
-            required
-            onChange={(event) =>
-              handleFormInputs({
-                type: "firstName",
-                data: event.currentTarget.value,
-              })
+            placeholder="Enter your first name"
+            value={signUp.inputs.firstname ?? ""}
+            helpText="First name should only have letter's"
+            showHelperText={!signUp.inputUIValidation.isFirstNameValid}
+            handleFormInputs={(data) =>
+              handleFormInputs({ type: "firstName", data: data ?? "" })
             }
+            handleUIVerify={(data) => handleUIVerify("firstName", data)}
+            isRequired
           />
-          {!signUp.inputUIValidation.isFirstNameValid && (
-            <p className="input-helper-text">
-              <BsInfoCircle /> First name should only have letter's
-            </p>
-          )}
 
-          <input
+          <FormInput
             type="text"
-            placeholder="Enter your last name"
-            onBlur={(e) => handleUIVerify("lastName", e.target.validity.valid)}
-            value={signUp.inputs.lastname}
             name="lastName"
-            required
-            onChange={(event) =>
-              handleFormInputs({
-                type: "lastName",
-                data: event.currentTarget.value,
-              })
+            placeholder="Enter your last name"
+            value={signUp.inputs.lastname ?? ""}
+            helpText="Last name should only have letter's"
+            showHelperText={!signUp.inputUIValidation.isLastNameValid}
+            handleFormInputs={(data) =>
+              handleFormInputs({ type: "lastName", data: data ?? "" })
             }
+            handleUIVerify={(data) => handleUIVerify("lastName", data)}
+            isRequired
           />
-          {!signUp.inputUIValidation.isLastNameValid && (
-            <p className="input-helper-text">
-              <BsInfoCircle /> Last name should only have letter's
-            </p>
-          )}
 
-          <input
+          <FormInput
             type="email"
             placeholder="Enter your email address"
             value={signUp.inputs.Email}
-            onBlur={(e) => handleUIVerify("email", e.target.validity.valid)}
             name="emailAddress"
-            required
-            onChange={(event) =>
-              handleFormInputs({
-                type: "email",
-                data: event.currentTarget.value,
-              })
+            handleFormInputs={(data) =>
+              handleFormInputs({ type: "email", data: data ?? "" })
             }
+            handleUIVerify={(data) => handleUIVerify("email", data)}
+            showHelperText={!signUp.inputUIValidation.isEmailValid}
+            helpText="Email is incorrect"
+            isRequired
           />
-          {!signUp.inputUIValidation.isEmailValid && (
-            <p className="input-helper-text">
-              <BsInfoCircle /> Email is incorrect
-            </p>
-          )}
 
-          <input
-            type="tel"
+          <FormInput
+            type="phone"
             placeholder="Enter your phone number"
             value={signUp.inputs.Phone1}
             name="phone"
-            onBlur={(e) => handleUIVerify("phone", e.target.validity.valid)}
-            required
-            pattern="[0-9]{10}"
-            maxLength={10}
-            onChange={(event) =>
-              handleFormInputs({
-                type: "phone",
-                data: event.currentTarget.value,
-              })
+            handleFormInputs={(data) =>
+              handleFormInputs({ type: "phone", data: data ?? "" })
             }
+            handleUIVerify={(data) => handleUIVerify("phone", data)}
+            showHelperText={!signUp.inputUIValidation.isPhoneValid}
+            helpText="Phone should have 10 number's without country code"
+            isRequired
           />
-          {!signUp.inputUIValidation.isPhoneValid && (
-            <p className="input-helper-text">
-              <BsInfoCircle /> Phone should have 10 number's without country
-              code
-            </p>
-          )}
 
-          <input
+          <FormInput
             type="password"
             placeholder="Enter your password"
             value={signUp.inputs.Password}
             name="password"
-            autoComplete="off"
-            onBlur={(e) => handleUIVerify("password", e.target.validity.valid)}
-            required
-            minLength={8}
-            onChange={(event) =>
-              handleFormInputs({
-                type: "password",
-                data: event.currentTarget.value,
-              })
+            handleFormInputs={(data) =>
+              handleFormInputs({ type: "password", data: data ?? "" })
             }
+            handleUIVerify={(data) => handleUIVerify("password", data)}
+            showHelperText={!signUp.inputUIValidation.isPasswordValid}
+            helpText="Password should have minimum length 8 including Number, Special Character, and Letter's"
+            isRequired
           />
-          {!signUp.inputUIValidation.isPasswordValid && (
-            <p className="input-helper-text">
-              <BsInfoCircle /> Password should have minimum length 8 including
-              Number, Special Character, and Letter's
-            </p>
-          )}
 
           <span className="right-container-form-sign-up-remember-me">
             <input type="checkbox" name="rememberMe" value="Remember Me" />
             <p>Remember Me</p>
           </span>
-          <input
-            className={`right-container-form-sign-up-submit ${
-              signUp.loading || !signUp.isSignUpFormValid ? "disabled" : ""
-            }`}
+
+          <FormInput
             type="submit"
             value={signUp.loading ? "Submitting..." : "Sign Up Now!"}
-            disabled={signUp.loading}
-            onClick={() =>
-              handleFormInputs({
-                type: "submitForm",
-                data: "",
-              })
+            name="submit"
+            isDisabled={signUp.loading}
+            handleFormInputs={(data) =>
+              handleFormInputs({ type: "submitForm", data: data ?? "" })
             }
           />
+
           <div className="right-container-form-sign-up-extra-options">
             <div className="signup-via-third-party">
               <strong>Sign in using</strong>
