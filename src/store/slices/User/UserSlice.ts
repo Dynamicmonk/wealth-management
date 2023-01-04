@@ -8,6 +8,10 @@ import { updateUserProfileUseCase } from "../../../services/useCases/user/update
 
 import { getRelatedMembersUsingIdUseCase } from "../../../services/useCases/user/getRelatedMembersUsingIdUseCase";
 import { getIndividualUserProfileUseCase } from "../../../services/useCases/user/getIndividualUserProfileUseCase";
+import { isEmailValidUseCase } from "../../../services/useCases/validations/isEmailValidUseCase";
+import { isPasswordValidUseCase } from "../../../services/useCases/validations/isPasswordValidUseCase";
+import { isPhoneValidUseCase } from "../../../services/useCases/validations/isPhoneValidUseCase";
+import { isUserNameValidUseCase } from "../../../services/useCases/validations/isUserNameValidUseCase";
 
 export const performUserSignIn = createAsyncThunk<
   userSigInUpResponse,
@@ -186,39 +190,46 @@ const UserSlice = createSlice({
       action: {
         payload: {
           type: "signUp" | "signIn";
+          subType: "inputs" | "apiCall";
         };
       }
     ) => {
-      const { type } = action.payload;
+      const { type, subType } = action.payload;
       switch (type) {
         case "signUp":
-          state.signUp.inputs.Email = "";
-          state.signUp.inputs.firstname = "";
-          state.signUp.inputs.lastname = "";
-          state.signUp.inputs.Phone1 = "";
-          state.signUp.inputs.Password = "";
-          state.signUp.isSignUpFormValid = false;
-          state.signUp.signUpData = null;
-          state.signUp.error = null;
+          if (subType === "inputs") {
+            state.signUp.inputs.Email = "";
+            state.signUp.inputs.firstname = "";
+            state.signUp.inputs.lastname = "";
+            state.signUp.inputs.Phone1 = "";
+            state.signUp.inputs.Password = "";
+            state.signUp.inputUIValidation.isEmailValid = true;
+            state.signUp.inputUIValidation.isFirstNameValid = true;
+            state.signUp.inputUIValidation.isLastNameValid = true;
+            state.signUp.inputUIValidation.isPasswordValid = true;
+            state.signUp.inputUIValidation.isPhoneValid = true;
+          } else if (subType === "apiCall") {
+            state.signUp.isSignUpFormValid = false;
+            state.signUp.signUpData = null;
+            state.signUp.error = null;
+          }
 
-          state.signUp.inputUIValidation.isEmailValid = true;
-          state.signUp.inputUIValidation.isFirstNameValid = true;
-          state.signUp.inputUIValidation.isLastNameValid = true;
-          state.signUp.inputUIValidation.isPasswordValid = true;
-          state.signUp.inputUIValidation.isPhoneValid = true;
           break;
 
         case "signIn":
-          state.signIn.inputs.Email = "";
-          state.signIn.inputs.Phone1 = "";
-          state.signIn.inputs.Password = "";
-          state.signIn.isSignInFormValid = false;
-          state.signIn.signInData = null;
-          state.signIn.error = null;
+          if (subType === "inputs") {
+            state.signIn.inputs.Email = "";
+            state.signIn.inputs.Phone1 = "";
+            state.signIn.inputs.Password = "";
+            state.signIn.inputUIValidation.isEmailValid = true;
+            state.signIn.inputUIValidation.isPasswordValid = true;
+            state.signIn.inputUIValidation.isPhoneValid = true;
+          } else if (subType === "apiCall") {
+            state.signIn.isSignInFormValid = false;
+            state.signIn.signInData = null;
+            state.signIn.error = null;
+          }
 
-          state.signIn.inputUIValidation.isEmailValid = true;
-          state.signIn.inputUIValidation.isPasswordValid = true;
-          state.signIn.inputUIValidation.isPhoneValid = true;
           break;
 
         default:
@@ -357,37 +368,17 @@ const UserSlice = createSlice({
     ) => {
       const { type } = action.payload;
 
-      const emailExpression =
-        /^[a-zA-Z0-9]+[a-zA-Z0-9-+_.]+@[a-zA-Z0-9+-]+\.([a-zA-Z0-9.])+/g;
-
-      const passwordExpression =
-        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{6,50}$/;
-
       switch (type) {
         case "signIn":
           state.signIn.isSignInFormValid = false;
 
           const signInInputs = state.signIn.inputs;
 
-          if (!signInInputs.Email) return;
+          if (!isEmailValidUseCase(signInInputs.Email)) return;
 
-          if (signInInputs.Email.length <= 6) return;
+          if (!isPasswordValidUseCase(signInInputs.Password)) return;
 
-          if (signInInputs.Email.match(emailExpression) === null) return;
-
-          if (signInInputs.Email.match(emailExpression)?.length !== 1) return;
-
-          if (signInInputs.Email.split("@").length > 2) return;
-
-          if (!signInInputs.Password) return;
-
-          if (signInInputs.Password.length < 8) return;
-
-          if (signInInputs.Password.match(passwordExpression) === null) return;
-
-          if (!signInInputs.Phone1) return;
-
-          if (signInInputs.Phone1.length !== 10) return;
+          if (!isPhoneValidUseCase(signInInputs.Phone1)) return;
 
           state.signIn.isSignInFormValid = true;
           break;
@@ -397,33 +388,15 @@ const UserSlice = createSlice({
 
           const signUpInputs = state.signUp.inputs;
 
-          if (!signUpInputs.firstname) return;
+          if (!isUserNameValidUseCase(signUpInputs.firstname ?? "")) return;
 
-          if (signUpInputs.firstname.length < 3) return;
+          if (!isUserNameValidUseCase(signUpInputs.lastname ?? "")) return;
 
-          if (!signUpInputs.lastname) return;
+          if (!isEmailValidUseCase(signUpInputs.Email)) return;
 
-          if (signUpInputs.lastname.length < 3) return;
+          if (!isPasswordValidUseCase(signUpInputs.Password)) return;
 
-          if (!signUpInputs.Email) return;
-
-          if (signUpInputs.Email.length <= 6) return;
-
-          if (signUpInputs.Email.match(emailExpression) === null) return;
-
-          if (signUpInputs.Email.match(emailExpression)?.length !== 1) return;
-
-          if (signUpInputs.Email.split("@").length > 2) return;
-
-          if (!signUpInputs.Password) return;
-
-          if (signUpInputs.Password.length < 8) return;
-
-          if (signUpInputs.Password.match(passwordExpression) === null) return;
-
-          if (!signUpInputs.Phone1) return;
-
-          if (signUpInputs.Phone1.length !== 10) return;
+          if (!isPhoneValidUseCase(signUpInputs.Phone1)) return;
 
           state.signUp.isSignUpFormValid = true;
           break;
@@ -438,7 +411,7 @@ const UserSlice = createSlice({
         payload: {
           type: "signUp" | "signIn";
           inputType: "firstName" | "lastName" | "password" | "phone" | "email";
-          data: boolean;
+          data: string;
         };
       }
     ) => {
@@ -447,38 +420,46 @@ const UserSlice = createSlice({
       switch (inputType) {
         case "email":
           if (type === "signIn") {
-            state.signIn.inputUIValidation.isEmailValid = data;
+            state.signIn.inputUIValidation.isEmailValid =
+              isEmailValidUseCase(data);
             break;
           }
-          state.signUp.inputUIValidation.isEmailValid = data;
+          state.signUp.inputUIValidation.isEmailValid =
+            isEmailValidUseCase(data);
           break;
 
         case "firstName":
           if (type === "signUp") {
-            state.signUp.inputUIValidation.isFirstNameValid = data;
+            state.signUp.inputUIValidation.isFirstNameValid =
+              isUserNameValidUseCase(data ?? "") as boolean;
           }
           break;
 
         case "lastName":
           if (type === "signUp") {
-            state.signUp.inputUIValidation.isLastNameValid = data;
+            state.signUp.inputUIValidation.isLastNameValid =
+              isUserNameValidUseCase(data ?? "") as boolean;
           }
           break;
 
         case "password":
           if (type === "signIn") {
-            state.signIn.inputUIValidation.isPasswordValid = data;
+            state.signIn.inputUIValidation.isPasswordValid =
+              isPasswordValidUseCase(data);
             break;
           }
-          state.signUp.inputUIValidation.isPasswordValid = data;
+          state.signUp.inputUIValidation.isPasswordValid =
+            isPasswordValidUseCase(data);
           break;
 
         case "phone":
           if (type === "signIn") {
-            state.signIn.inputUIValidation.isPhoneValid = data;
+            state.signIn.inputUIValidation.isPhoneValid =
+              isPhoneValidUseCase(data);
             break;
           }
-          state.signUp.inputUIValidation.isPhoneValid = data;
+          state.signUp.inputUIValidation.isPhoneValid =
+            isPhoneValidUseCase(data);
           break;
 
         default:

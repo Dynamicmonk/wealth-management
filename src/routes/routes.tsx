@@ -6,7 +6,7 @@ import { SIGN_IN_PATH, SIGN_UP_PATH } from "./constants";
 export const routes: routesTypes[] = [
   {
     path: "/",
-    element: <h1>Pages are in progress!</h1>,
+    element: <h1>you are in...soon pages will be visible here...</h1>,
   },
   {
     path: SIGN_UP_PATH,

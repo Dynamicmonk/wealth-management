@@ -78,20 +78,6 @@ export const StyleSignIn = styled.div`
       flex-direction: column;
       margin-top: ${({ theme }) => theme.spaces.m};
 
-      & input {
-        height: 45px;
-        padding: 4px;
-
-        &::placeholder {
-          font-size: 18px;
-          font-family: "Karla", sans-serif;
-        }
-      }
-
-      & .input-helper-text {
-        font-size: 14px;
-      }
-
       & .right-container-form-sign-up-remember-me {
         display: flex;
         align-items: center;
@@ -99,28 +85,6 @@ export const StyleSignIn = styled.div`
         & p {
           margin-left: ${({ theme }) => theme.spaces.xxs};
           font-size: ${({ theme }) => theme.deskTopfontSize.secondary};
-        }
-      }
-
-      & .right-container-form-sign-up-submit {
-        background-color: ${({ theme }) => theme.colors.secondary.blue};
-        border: 0;
-        border-radius: ${({ theme }) => theme.borderRadius.xxs};
-        color: ${({ theme }) => theme.colors.neutral100};
-        cursor: pointer;
-
-        &:hover {
-          filter: brightness(1.04);
-        }
-      }
-
-      & .disabled {
-        background-color: grey;
-        cursor: not-allowed;
-        user-select: none;
-
-        &:hover {
-          filter: brightness(1);
         }
       }
 
@@ -144,7 +108,7 @@ export const StyleSignIn = styled.div`
           & .social-media-button {
             margin-top: ${({ theme }) => theme.spaces.xs};
             display: flex;
-            gap: ${({ theme }) => theme.spaces.xxs};
+            gap: ${({ theme }) => theme.spaces.s};
           }
         }
 

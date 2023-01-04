@@ -3,14 +3,16 @@ import { useEffect, useState, useRef, FC } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { FaGoogle, FaTwitter, FaFacebookF } from "react-icons/fa";
-import { BsInfoCircle } from "react-icons/bs";
 
 import { StyleSignIn } from "./Styles/StyleSignIn";
+
+import { FormInput } from "../../Form/FormInput";
+
 import { useAppDispatch, useAppSelector } from "../../../store/useStoreHooks";
 
 import { loginWallpaper } from "../../../assets/images/imagesList";
 
-import { SIGN_IN_PATH, SIGN_UP_PATH } from "../../../routes/constants";
+import { SIGN_UP_PATH } from "../../../routes/constants";
 import {
   handleVerifyUIInputs,
   performUserSignIn,
@@ -31,7 +33,7 @@ export const SignIn: FC = () => {
 
   const handleUIVerify = (
     inputType: "firstName" | "lastName" | "password" | "phone" | "email",
-    data: boolean
+    data: string
   ) => {
     dispatch(handleVerifyUIInputs({ type: "signIn", inputType, data }));
   };
@@ -57,7 +59,12 @@ export const SignIn: FC = () => {
         break;
 
       case "submitForm":
-        if (!signIn.isSignInFormValid) return;
+        if (!signIn.isSignInFormValid) {
+          handleUIVerify("email", signIn.inputs.Email);
+          handleUIVerify("password", signIn.inputs.Password);
+          handleUIVerify("phone", signIn.inputs.Phone1);
+          return;
+        }
 
         dispatch(
           performUserSignIn({
@@ -78,17 +85,18 @@ export const SignIn: FC = () => {
   useEffect(() => {
     if (signIn.signInData || signIn.error) {
       setAccountCreated(true);
-      dispatch(resetUserFormInputs({ type: "signIn" }));
+      dispatch(resetUserFormInputs({ type: "signIn", subType: "inputs" }));
 
       modelTimerRef.current = window.setTimeout(() => {
         setAccountCreated(false);
-        navigate(signIn.error ? SIGN_IN_PATH : "/");
-      }, 2000);
+        !signIn.error && signIn.signInData && navigate("/");
+        dispatch(resetUserFormInputs({ type: "signIn", subType: "apiCall" }));
+      }, 4000);
     }
 
     return () => {
       modelTimerRef.current && window.clearTimeout(modelTimerRef.current);
-      dispatch(resetUserFormInputs({ type: "signIn" }));
+      dispatch(resetUserFormInputs({ type: "signIn", subType: "inputs" }));
     };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -122,90 +130,63 @@ export const SignIn: FC = () => {
           className="right-container-form-sign-up"
           onSubmit={(event) => event.preventDefault()}
         >
-          <input
+          <FormInput
             type="email"
             placeholder="Enter your email address"
             value={signIn.inputs.Email}
             name="emailAddress"
-            required
-            onBlur={(e) => handleUIVerify("email", e.target.validity.valid)}
-            onChange={(event) =>
-              handleFormInputs({
-                type: "email",
-                data: event.currentTarget.value,
-              })
+            handleFormInputs={(data) =>
+              handleFormInputs({ type: "email", data: data ?? "" })
             }
+            handleUIVerify={(data) => handleUIVerify("email", data)}
+            showHelperText={!signIn.inputUIValidation.isEmailValid}
+            helpText="Email is incorrect"
+            isRequired
           />
-          {!signIn.inputUIValidation.isEmailValid && (
-            <p className="input-helper-text">
-              <BsInfoCircle /> Email is incorrect
-            </p>
-          )}
 
-          <input
-            type="tel"
+          <FormInput
+            type="phone"
             placeholder="Enter your phone number"
             value={signIn.inputs.Phone1}
             name="phone"
-            pattern="[0-9]{10}"
-            required
-            onBlur={(e) => handleUIVerify("phone", e.target.validity.valid)}
-            maxLength={10}
-            onChange={(event) =>
-              handleFormInputs({
-                type: "phone",
-                data: event.currentTarget.value,
-              })
+            handleFormInputs={(data) =>
+              handleFormInputs({ type: "phone", data: data ?? "" })
             }
+            handleUIVerify={(data) => handleUIVerify("phone", data)}
+            showHelperText={!signIn.inputUIValidation.isPhoneValid}
+            helpText="Phone should have 10 number's without country code"
+            isRequired
           />
-          {!signIn.inputUIValidation.isPhoneValid && (
-            <p className="input-helper-text">
-              <BsInfoCircle /> Phone should have 10 number's without country
-              code
-            </p>
-          )}
 
-          <input
+          <FormInput
             type="password"
             placeholder="Enter your password"
             value={signIn.inputs.Password}
             name="password"
-            autoComplete="off"
-            onBlur={(e) => handleUIVerify("password", e.target.validity.valid)}
-            required
-            minLength={8}
-            onChange={(event) =>
-              handleFormInputs({
-                type: "password",
-                data: event.currentTarget.value,
-              })
+            handleFormInputs={(data) =>
+              handleFormInputs({ type: "password", data: data ?? "" })
             }
+            handleUIVerify={(data) => handleUIVerify("password", data)}
+            showHelperText={!signIn.inputUIValidation.isPasswordValid}
+            helpText="Password should have minimum length 8 including Number, Special Character, and Letter's"
+            isRequired
           />
-          {!signIn.inputUIValidation.isPasswordValid && (
-            <p className="input-helper-text">
-              <BsInfoCircle /> Password should have minimum length 8 including
-              Number, Special Character, and Letter's
-            </p>
-          )}
 
           <span className="right-container-form-sign-up-remember-me">
             <input type="checkbox" name="rememberMe" value="Remember Me" />
             <p>Remember me</p>
           </span>
-          <input
-            className={`right-container-form-sign-up-submit ${
-              signIn.loading || !signIn.isSignInFormValid ? "disabled" : ""
-            }`}
+
+          <FormInput
             type="submit"
             value={signIn.loading ? "Submitting..." : "Sign In Now!"}
-            disabled={signIn.loading}
-            onClick={() =>
-              handleFormInputs({
-                type: "submitForm",
-                data: "",
-              })
+            name="submit"
+            isDisabled={signIn.loading}
+            handleFormInputs={(data) =>
+              handleFormInputs({ type: "submitForm", data: data ?? "" })
             }
           />
+
           <div className="right-container-form-sign-up-extra-options">
             <div className="signup-via-third-party">
               <strong>Sign in using</strong>
